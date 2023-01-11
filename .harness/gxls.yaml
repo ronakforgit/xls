@@ -32,7 +32,7 @@ pipeline:
                   identifier: d
                   spec:
                     shell: Bash
-                    command: |
+                    command: |-
                       # python --version
                       # sudo ls /usr/bin/python*
                       # sudo add-apt-repository ppa:deadsnakes/ppa
@@ -47,6 +47,8 @@ pipeline:
                        sudo mkdir -p "bin/"
                        sudo mv bazelisk-linux-amd64 "bin/bazel"
                        sudo chmod +x "bin/bazel"
+
+                       sudo apt-get install python3-dev python3-distutils python3-dev python-is-python3 libtinfo5
               - step:
                   type: Run
                   name: "Bazel Build Fuzz Driver "
