@@ -55,7 +55,10 @@ pipeline:
                   identifier: Bazel_Build_Fuzz_Driver
                   spec:
                     shell: Bash
-                    command: sudo -H "bin/bazel" build -c opt xls/fuzzer:run_fuzz_multiprocess
+                    command: |-
+                      ls -a 
+                      tree -a -L 2
+                      sudo -H "bin/bazel" build -c opt xls/fuzzer:run_fuzz_multiprocess
               - step:
                   type: Run
                   name: Bazel Run Fuzz
