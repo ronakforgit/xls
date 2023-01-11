@@ -62,6 +62,9 @@ pipeline:
                       ls -a 
                       tree -a -L 2
                       sudo -H "bin/bazel" build -c opt xls/fuzzer:run_fuzz_multiprocess
+
+                      ls -a 
+                      tree -a -L 2
               - step:
                   type: Run
                   name: Bazel Run Fuzz
