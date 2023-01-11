@@ -1,0 +1,63 @@
+pipeline:
+  name: gxls
+  identifier: gxls
+  projectIdentifier: NgLabs
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: gitforronak
+        repoName: xls
+        build: <+input>
+  stages:
+    - stage:
+        name: build
+        identifier: build
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: install bazel
+                  identifier: d
+                  spec:
+                    shell: Sh
+                    command: |
+                      # python --version
+                      # sudo ls /usr/bin/python*
+                      # sudo add-apt-repository ppa:deadsnakes/ppa
+                      # sudo apt install python3.8 -y
+                      # sudo ls /usr/bin/python*
+                      # sudo ln -sf /usr/bin/python3.8 /usr/bin/python3 
+                      # python --version
+                      pip install wheel
+
+
+                       sudo curl -LO "https://github.com/bazelbuild/bazelisk/releases/download/v1.1.0/bazelisk-linux-amd64"
+                       sudo mkdir -p "bin/"
+                       sudo mv bazelisk-linux-amd64 "bin/bazel"
+                       sudo chmod +x "bin/bazel"
+              - step:
+                  type: Run
+                  name: "Bazel Build Fuzz Driver "
+                  identifier: Bazel_Build_Fuzz_Driver
+                  spec:
+                    shell: Sh
+                    command: sudo -H "bin/bazel" build -c opt xls/fuzzer:run_fuzz_multiprocess
+              - step:
+                  type: Run
+                  name: Bazel Run Fuzz
+                  identifier: Bazel_Run_Fuzz
+                  spec:
+                    shell: Sh
+                    command: sudo -H "bin/bazel" run -c opt xls/fuzzer:run_fuzz_multiprocess -- --crash_path "crashers" --sample_count=1024 --codegen=false --simulate=false --short_samples=false --emit_loops=False --summary_path "crashers"
