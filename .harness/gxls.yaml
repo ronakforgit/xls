@@ -31,7 +31,7 @@ pipeline:
                   name: install bazel
                   identifier: d
                   spec:
-                    shell: Sh
+                    shell: Bash
                     command: |
                       # python --version
                       # sudo ls /usr/bin/python*
@@ -52,12 +52,12 @@ pipeline:
                   name: "Bazel Build Fuzz Driver "
                   identifier: Bazel_Build_Fuzz_Driver
                   spec:
-                    shell: Sh
+                    shell: Bash
                     command: sudo -H "bin/bazel" build -c opt xls/fuzzer:run_fuzz_multiprocess
               - step:
                   type: Run
                   name: Bazel Run Fuzz
                   identifier: Bazel_Run_Fuzz
                   spec:
-                    shell: Sh
+                    shell: Bash
                     command: sudo -H "bin/bazel" run -c opt xls/fuzzer:run_fuzz_multiprocess -- --crash_path "crashers" --sample_count=1024 --codegen=false --simulate=false --short_samples=false --emit_loops=False --summary_path "crashers"
