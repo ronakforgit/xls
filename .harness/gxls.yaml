@@ -40,14 +40,9 @@ pipeline:
                       # sudo ls /usr/bin/python*
                       # sudo ln -sf /usr/bin/python3.8 /usr/bin/python3 
                       # python --version
-                      ls -a 
-                      tree -a -L 2
-                      cd ~
-                      ls -a 
-                      tree -a -L 2
-                      ls -a $HOME/.cache
 
-                      pip install wheel
+
+
 
 
                        sudo curl -LO "https://github.com/bazelbuild/bazelisk/releases/download/v1.1.0/bazelisk-linux-amd64"
