@@ -85,5 +85,5 @@ pipeline:
                     bucket: migration-artifact-comman
                     key: bazel
                     sourcePaths:
-                      - ~/.cache/bazel
+                      - /home/ubuntu/.cache/bazel
                     archiveFormat: Tar
