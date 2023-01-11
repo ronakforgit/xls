@@ -45,7 +45,7 @@ pipeline:
                       cd ~
                       ls -a 
                       tree -a -L 2
-
+                      ls -a $HOME/.cache
 
                       pip install wheel
 
