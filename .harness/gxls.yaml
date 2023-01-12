@@ -96,4 +96,4 @@ pipeline:
                     command: |
                       sudo -H "bin/bazel" run -c opt xls/fuzzer:run_fuzz_multiprocess -- --crash_path "crashers" --sample_count=1024 --codegen=false --simulate=false --emit_loops=False --summary_path "crashers"
           sharedPaths:
-            - /home/ubuntu
+            - /home/ubuntu/
