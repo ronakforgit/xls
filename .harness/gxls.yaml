@@ -52,6 +52,15 @@ pipeline:
 
                        sudo apt-get install python3-dev python3-distutils python3-dev python-is-python3 libtinfo5
               - step:
+                  type: RestoreCacheGCS
+                  name: "restore bazel cache "
+                  identifier: restore_bazel_cache
+                  spec:
+                    connectorRef: ronakgcpbucket
+                    bucket: migration-artifact-comman
+                    key: bazel
+                    archiveFormat: Tar
+              - step:
                   type: Run
                   name: "Bazel Build Fuzz Driver "
                   identifier: Bazel_Build_Fuzz_Driver
