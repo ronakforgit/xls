@@ -58,7 +58,6 @@ pipeline:
                     connectorRef: ronakgcpbucket
                     bucket: migration-artifact-comman
                     key: bazel
-                    archiveFormat: Tar
               - step:
                   type: Run
                   name: "Bazel Build Fuzz Driver "
@@ -86,7 +85,6 @@ pipeline:
                     key: bazel
                     sourcePaths:
                       - "/home/ubuntu/.cache/bazel "
-                    archiveFormat: Tar
               - step:
                   type: Run
                   name: Bazel Run Fuzz
