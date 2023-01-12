@@ -51,14 +51,6 @@ pipeline:
 
                        sudo apt-get install python3-dev python3-distutils python3-dev python-is-python3 libtinfo5
               - step:
-                  type: RestoreCacheGCS
-                  name: "restore bazel cache "
-                  identifier: restore_bazel_cache
-                  spec:
-                    connectorRef: ronakgcpbucket
-                    bucket: migration-artifact-comman
-                    key: bazel
-              - step:
                   type: Run
                   name: "Bazel Build Fuzz Driver "
                   identifier: Bazel_Build_Fuzz_Driver
@@ -93,5 +85,13 @@ pipeline:
                     shell: Bash
                     command: |
                       sudo -H "bin/bazel" run -c opt xls/fuzzer:run_fuzz_multiprocess -- --crash_path "crashers" --sample_count=1024 --codegen=false --simulate=false --emit_loops=False --summary_path "crashers"
+              - step:
+                  type: RestoreCacheGCS
+                  name: "restore bazel cache "
+                  identifier: restore_bazel_cache
+                  spec:
+                    connectorRef: ronakgcpbucket
+                    bucket: migration-artifact-comman
+                    key: bazel
           sharedPaths:
             - /home/ubuntu/
