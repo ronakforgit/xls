@@ -64,13 +64,10 @@ pipeline:
 
                       ls -a 
                       tree -a -L 2
-              - step:
-                  type: Run
-                  name: Bazel Run Fuzz
-                  identifier: Bazel_Run_Fuzz
-                  spec:
-                    shell: Bash
-                    command: sudo -H "bin/bazel" run -c opt xls/fuzzer:run_fuzz_multiprocess -- --crash_path "crashers" --sample_count=1024 --codegen=false --simulate=false --emit_loops=False --summary_path "crashers"
+
+                      cd /home/ubuntu/.cache
+                      ls -a 
+                      tree -a 
               - step:
                   type: SaveCacheGCS
                   name: save cache
@@ -80,5 +77,13 @@ pipeline:
                     bucket: migration-artifact-comman
                     key: bazel
                     sourcePaths:
-                      - /home/ubuntu/.cache/bazel
+                      - bazel
                     archiveFormat: Tar
+              - step:
+                  type: Run
+                  name: Bazel Run Fuzz
+                  identifier: Bazel_Run_Fuzz
+                  spec:
+                    shell: Bash
+                    command: |
+                      sudo -H "bin/bazel" run -c opt xls/fuzzer:run_fuzz_multiprocess -- --crash_path "crashers" --sample_count=1024 --codegen=false --simulate=false --emit_loops=False --summary_path "crashers"
