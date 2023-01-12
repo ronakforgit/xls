@@ -90,6 +90,7 @@ pipeline:
                       - bazel-harness
                       - bazel-out
                       - bazel-testlogs
+                      - /root/.cache/bazel
                     archiveFormat: Tar
               - step:
                   type: Run
