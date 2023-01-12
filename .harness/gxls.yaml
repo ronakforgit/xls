@@ -14,7 +14,6 @@ pipeline:
     - stage:
         name: build
         identifier: build
-        description: ""
         type: CI
         spec:
           cloneCodebase: true
@@ -86,11 +85,7 @@ pipeline:
                     bucket: migration-artifact-comman
                     key: bazel
                     sourcePaths:
-                      - bazel-bin
-                      - bazel-harness
-                      - bazel-out
-                      - bazel-testlogs
-                      - /root/.cache/bazel
+                      - "/home/ubuntu/.cache/bazel "
                     archiveFormat: Tar
               - step:
                   type: Run
@@ -100,3 +95,6 @@ pipeline:
                     shell: Bash
                     command: |
                       sudo -H "bin/bazel" run -c opt xls/fuzzer:run_fuzz_multiprocess -- --crash_path "crashers" --sample_count=1024 --codegen=false --simulate=false --emit_loops=False --summary_path "crashers"
+          sharedPaths:
+            - "~"
+            - /home/ubuntu
