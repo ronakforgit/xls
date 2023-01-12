@@ -26,6 +26,14 @@ pipeline:
           execution:
             steps:
               - step:
+                  type: RestoreCacheGCS
+                  name: "restore bazel cache "
+                  identifier: restore_bazel_cache
+                  spec:
+                    connectorRef: ronakgcpbucket
+                    bucket: migration-artifact-comman
+                    key: bazel
+              - step:
                   type: Run
                   name: install bazel
                   identifier: d
@@ -85,13 +93,5 @@ pipeline:
                     shell: Bash
                     command: |
                       sudo -H "bin/bazel" run -c opt xls/fuzzer:run_fuzz_multiprocess -- --crash_path "crashers" --sample_count=1024 --codegen=false --simulate=false --emit_loops=False --summary_path "crashers"
-              - step:
-                  type: RestoreCacheGCS
-                  name: "restore bazel cache "
-                  identifier: restore_bazel_cache
-                  spec:
-                    connectorRef: ronakgcpbucket
-                    bucket: migration-artifact-comman
-                    key: bazel
           sharedPaths:
             - /home/ubuntu/
