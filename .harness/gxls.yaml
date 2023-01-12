@@ -77,7 +77,10 @@ pipeline:
                     bucket: migration-artifact-comman
                     key: bazel
                     sourcePaths:
-                      - bazel
+                      - bazel-bin
+                      - bazel-harness
+                      - bazel-out
+                      - bazel-testlogs
                     archiveFormat: Tar
               - step:
                   type: Run
