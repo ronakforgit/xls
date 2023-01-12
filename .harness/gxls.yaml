@@ -67,7 +67,7 @@ pipeline:
 
                       cd /home/ubuntu/.cache
                       ls -a 
-                      tree -a 
+                      tree -a -L 2
               - step:
                   type: SaveCacheGCS
                   name: save cache
