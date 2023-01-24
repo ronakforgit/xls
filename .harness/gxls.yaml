@@ -7,8 +7,8 @@ pipeline:
   properties:
     ci:
       codebase:
-        connectorRef: gitforronak
-        repoName: xls
+        connectorRef: account.gitforronak
+        repoName: BuildJet/xls
         build: <+input>
   stages:
     - stage:
