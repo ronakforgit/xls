@@ -36,7 +36,6 @@ pipeline:
                     archiveFormat: Tar
                   when:
                     stageStatus: Success
-                    condition: "false"
                   failureStrategies: []
               - step:
                   type: Run
