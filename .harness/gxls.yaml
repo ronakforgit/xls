@@ -33,6 +33,11 @@ pipeline:
                     connectorRef: ronakgcpbucket
                     bucket: migration-artifact-comman
                     key: bazel
+                    archiveFormat: Tar
+                  when:
+                    stageStatus: Success
+                    condition: "false"
+                  failureStrategies: []
               - step:
                   type: Run
                   name: install bazel
