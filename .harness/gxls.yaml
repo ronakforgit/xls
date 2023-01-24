@@ -84,7 +84,8 @@ pipeline:
                     bucket: migration-artifact-comman
                     key: bazel
                     sourcePaths:
-                      - "/home/ubuntu/.cache/bazel "
+                      - /home/ubuntu/.cache/bazel
+                    archiveFormat: Tar
               - step:
                   type: Run
                   name: Bazel Run Fuzz
